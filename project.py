@@ -10,12 +10,14 @@ current_sentence_dict = None
 sentence_count = -1
 start_time = 0 
 
+#This are the sentences which will be displayed in the program
 sentences = [
     "Hello world",
     "My name is Mariusz",
     "This was CS50"
     ]
 
+# This function shows stats and end of the program
 def show_stats(total_time):
     words = sum([sentence.count(" ") + 1 for sentence in sentences])
 
@@ -26,6 +28,7 @@ def show_stats(total_time):
     Words per minute (wpm): {int(words * 60 / total_time)}
     """)
 
+# This function is used to display next sentences
 def next_sentence():
     global current_sentence, current_character, current_sentence_dict, sentence_count
 
@@ -43,7 +46,7 @@ def next_sentence():
     user_entry.delete(0, "end")
 
 
-
+# This function catches words that are not to be counted
 def ignore(key):
     if key in (
         keyboard.Key.alt_l,
@@ -69,7 +72,8 @@ def add_to_all_letters():
     all_letters_label.config(text = str(all_letters))
     current_character += 1
 
-
+# This is our main function. If the sentence's are identical, we get another one. 
+# If they are not identical we add bugs to the UI
 def on_press(key):
     global errors, all_letters, current_character, start_time
 
@@ -99,7 +103,7 @@ def on_press(key):
         add_to_all_letters()
         add_error()
 
-
+# This is our user interface imported from tkinter libraries
 root = Tk()
 root.title("Fast typing")
 root.geometry("800x400")
